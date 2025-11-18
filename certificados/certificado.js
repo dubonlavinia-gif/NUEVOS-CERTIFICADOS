@@ -1,31 +1,65 @@
-// <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Su Certificado</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+document.addEventListener('DOMContentLoaded', async () => {
+    const loader = document.getElementById('certificado-loader');
+    const wrapper = document.getElementById('certificado-wrapper');
+    const nombreEl = document.getElementById('nombre-persona');
+    const qrEl = document.getElementById('qr-code');
 
-    <main class="container">
-        <h1 style="text-align:center;">Generando Certificado Digital...</h1>
-        
-        <div id="certificado-loader" style="text-align:center;">
-            <p>Cargando diseño y datos...</p>
-        </div>
-        
-        <div id="certificado-wrapper" style="display:none;">
-            <div id="nombre-persona"></div>
-            <div id="qr-code"></div>
-        </div>
-        
-        <p style="text-align:center; margin-top:20px;"><a href="index.html">Generar otro Certificado</a></p>
-    </main>
+    const supabase = window.supabaseClient;
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-    <script src="supabaseClient.js"></script>
-    <script src="certificado.js"></script>
-</body>
-</html>
+    const mostrarError = (mensaje) => {
+        if (loader) loader.innerHTML = `<h2 class="mensaje error">${mensaje}</h2>`;
+    };
+
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const certificadoId = urlParams.get('id');
+
+        if (!certificadoId) {
+            throw new Error('No se encontró ID de certificado en la URL.');
+        }
+
+        // Buscar los datos del certificado y la configuración (en paralelo)
+        const [certRes, configRes] = await Promise.all([
+            supabase.from('certificados').select('nombre').eq('id', certificadoId).single(),
+            supabase.from('configuracion').select('*').eq('id', 1).single()
+        ]);
+
+        const { data: certData, error: certError } = certRes;
+        const { data: configData, error: configError } = configRes;
+
+        if (certError) throw new Error('Certificado no encontrado en la base de datos.');
+        if (configError) throw new Error('Error al cargar la configuración de diseño. Ve al panel Admin y guarda la configuración.');
+
+        // 3. Aplicar el diseño y los datos
+        wrapper.style.backgroundImage = `url(${configData.imagen_url})`;
+        
+        // Aplicar nombre + posición
+        nombreEl.textContent = certData.nombre;
+        nombreEl.style.position = 'absolute';
+        nombreEl.style.left = `${configData.nombre_x}px`;
+        nombreEl.style.top = `${configData.nombre_y}px`;
+
+        // 4. Generar el Código QR
+        const verificationUrl = `${window.location.origin}/NUEVOS-CERTIFICADOS/certificados/verificar.html?id=${certificadoId}`;
+        
+        // Asumiendo que la librería QRCode.js está cargada en certificado.html
+        new QRCode(qrEl, {
+            text: verificationUrl,
+            width: 100, 
+            height: 100
+        });
+
+        // Aplicar posición del QR
+        qrEl.style.position = 'absolute';
+        qrEl.style.left = `${configData.qr_x}px`;
+        qrEl.style.top = `${configData.qr_y}px`;
+
+        // Mostrar el certificado
+        if (loader) loader.style.display = 'none';
+        wrapper.style.display = 'block';
+
+    } catch (error) {
+        console.error(error.message);
+        mostrarError(`Error al cargar certificado: ${error.message}`);
+    }
+});
