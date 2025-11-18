@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (certError) throw new Error('Certificado no encontrado en la base de datos.');
         if (configError) throw new Error('Error al cargar la configuración de diseño. Ve al panel Admin y guarda la configuración.');
 
-        // 3. Aplicar el diseño y los datos
+        // Aplicar el diseño y los datos
         wrapper.style.backgroundImage = `url(${configData.imagen_url})`;
         
         // Aplicar nombre + posición
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         nombreEl.style.left = `${configData.nombre_x}px`;
         nombreEl.style.top = `${configData.nombre_y}px`;
 
-        // 4. Generar el Código QR
+        // Generar el Código QR
         const verificationUrl = `${window.location.origin}/NUEVOS-CERTIFICADOS/certificados/verificar.html?id=${certificadoId}`;
         
         // Asumiendo que la librería QRCode.js está cargada en certificado.html
