@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificado</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="certificado-container">
+        <div id="certificado" class="certificado">
+            <canvas id="certificadoCanvas"></canvas>
+        </div>
+        <div class="certificado-actions">
+            <button id="descargarBtn" class="btn-primary">Descargar Certificado</button>
+            <button id="imprimirBtn" class="btn-secondary">Imprimir</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabaseClient.js"></script>
+    <script src="certificado.js"></script>
+</body>
+</html>
+

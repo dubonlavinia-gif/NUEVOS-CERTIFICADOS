@@ -1,0 +1,21 @@
+{
+  "name": "generador-certificados",
+  "version": "1.0.0",
+  "description": "Aplicación para generar certificados con códigos QR",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve -s . -l 3000",
+    "dev": "npx serve -s . -l 3000"
+  },
+  "keywords": [
+    "certificados",
+    "qr",
+    "supabase"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}
+

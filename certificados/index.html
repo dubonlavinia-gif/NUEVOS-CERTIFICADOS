@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Certificados</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Generador de Certificados</h1>
+            <p>Complete el formulario para generar su certificado</p>
+        </header>
+
+        <main>
+            <form id="certificadoForm" class="form-container">
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo *</label>
+                    <input type="text" id="nombre" name="nombre" required placeholder="Ingrese su nombre completo">
+                </div>
+
+                <div class="form-group">
+                    <label for="identificacion">Número de Identificación *</label>
+                    <input type="text" id="identificacion" name="identificacion" required placeholder="Ingrese su número de identificación">
+                </div>
+
+                <div class="form-group">
+                    <label for="celular">Número de Celular *</label>
+                    <input type="tel" id="celular" name="celular" required placeholder="Ingrese su número de celular">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Correo Electrónico *</label>
+                    <input type="email" id="email" name="email" required placeholder="Ingrese su correo electrónico">
+                </div>
+
+                <button type="submit" class="btn-primary">Generar Certificado</button>
+            </form>
+
+            <div id="mensaje" class="mensaje"></div>
+        </main>
+
+        <footer>
+            <a href="admin.html" class="admin-link">Acceso Administrador</a>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabaseClient.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+
