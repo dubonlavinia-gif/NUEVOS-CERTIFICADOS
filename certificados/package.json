@@ -1,21 +1,15 @@
 {
   "name": "generador-certificados",
   "version": "1.0.0",
-  "description": "Aplicación para generar certificados con códigos QR",
+  "description": "Aplicación para generar certificados con Supabase y Railway",
   "main": "index.html",
   "scripts": {
-    "start": "npx serve -s . -l 3000",
-    "dev": "npx serve -s . -l 3000"
+    "start": "serve ./certificados -l 3000",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "certificados",
-    "qr",
-    "supabase"
-  ],
   "author": "",
-  "license": "MIT",
-  "devDependencies": {
+  "license": "ISC",
+  "dependencies": {
     "serve": "^14.2.1"
   }
 }
-

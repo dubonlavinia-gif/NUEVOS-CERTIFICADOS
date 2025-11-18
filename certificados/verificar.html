@@ -3,43 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificar Certificado</title>
+    <title>Verificación de Certificado</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Verificación de Certificado</h1>
-        </header>
 
-        <main>
-            <div id="resultado" class="verificacion-resultado">
-                <div id="cargando" class="cargando">
-                    <p>Verificando certificado...</p>
-                </div>
-                <div id="valido" class="certificado-valido" style="display: none;">
-                    <div class="icono-valido">✓</div>
-                    <h2>Certificado Válido</h2>
-                    <div class="datos-certificado">
-                        <p><strong>Nombre:</strong> <span id="nombreVerificado"></span></p>
-                        <p><strong>Número de Identificación:</strong> <span id="identificacionVerificada"></span></p>
-                        <p><strong>Celular:</strong> <span id="celularVerificado"></span></p>
-                        <p><strong>Correo:</strong> <span id="emailVerificado"></span></p>
-                        <p><strong>Fecha de Emisión:</strong> <span id="fechaEmision"></span></p>
-                    </div>
-                </div>
-                <div id="invalido" class="certificado-invalido" style="display: none;">
-                    <div class="icono-invalido">✗</div>
-                    <h2>Certificado Inválido</h2>
-                    <p>El certificado no existe o ha sido revocado.</p>
-                </div>
-            </div>
-        </main>
-    </div>
+    <main class="container">
+        <h1>Estado del Certificado</h1>
+        
+        <div id="info-certificado">
+            <p>Consultando validez...</p>
+        </div>
+        <p style="text-align:center; margin-top:20px;"><a href="index.html">Volver al Formulario</a></p>
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabaseClient.js"></script>
     <script src="verificar.js"></script>
 </body>
 </html>
-
